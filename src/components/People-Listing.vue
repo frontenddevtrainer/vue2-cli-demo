@@ -1,49 +1,34 @@
 <script lang="ts">
+// Fetch API - Browser Native
+// Axios - 3rd Party
+
+import Axios from "axios";
+
 export default {
     mounted() {
-        console.log("mounted");
-        this.interval = setInterval(()=>{
-            this.time = new Date();
-            console.log("setInterval")
-        }, 1000)
-    },
-    updated() {
-        console.log("updated")
-    },
-    destroyed() {
-        console.log("destroyed")
-        clearInterval(this.interval)
+        
+        Axios.get("https://jsonplaceholder.typicode.com/users")
+        .then((response)=>{
+            const { data } = response;
+            this.people = data;
+        })
+        .catch((error)=>{
+            console.log(error);
+        })
+
+
     },
     data: function () {
         return {
             companyName: "tavant",
             time: new Date(),
             interval: -1,
-            people: [
-                {
-                    name: "abc",
-                    age: 23,
-                    role: "Manager",
-                    profilePic: "",
-                    profileLink: ""
-                }
-            ]
+            people: []
         }
     },
     computed: {
-        generatePeople() {
-            return [...new Array(10)].map(() => {
-                return {
-                    name: "abc",
-                    age: Math.round(Math.random() * 30),
-                    role: "Manager",
-                    profilePic: "",
-                    profileLink: ""
-                }
-            })
-        },
         totalRecords() {
-            return this.generatePeople.length;
+            return this.people.length;
         },
         companyNameFormatted() {
             return this.companyName.toUpperCase()
@@ -61,7 +46,7 @@ export default {
     <div>
         <p>Current time: {{time}}</p>
         <p>Total records: {{ totalRecords }} in {{ companyNameFormatted }}</p>
-        <b-card v-for="person in generatePeople" :title="person.role" :img-src="person.profilePic" img-alt="Image" img-top
+        <b-card v-for="person in people" :title="person.role" :img-src="person.profilePic" img-alt="Image" img-top
             tag="article" style="max-width: 20rem;" class="mb-2">
             <b-card-text>
                 {{ person.name }} {{ person.age }}
