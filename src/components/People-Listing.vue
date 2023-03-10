@@ -4,18 +4,24 @@
 
 import Axios from "axios";
 import type { Person } from "../interfaces/person"
+import { loadPeople } from "../api/people"
 
 export default {
     mounted() {
-        this.loadData();
+        loadPeople().then((data)=>{
+            this.people = data;
+        }).catch((error)=>{
+            this.apiError = true;
+        })
     },
     filters: {
         website(value: Person) : string{
             return value.website + " " + value.company.name;
         }
     },
-    data: function (): { companyName: string, time: Date, interval: number, people: Person[] } {
+    data: function (): { companyName: string, time: Date, interval: number, people: Person[], apiError: boolean } {
         return {
+            apiError: false,
             companyName: "tavant",
             time: new Date(),
             interval: -1,
@@ -32,16 +38,7 @@ export default {
 
     },
     methods: {
-        loadData() {
-            Axios.get("https://jsonplaceholder.typicode.com/users")
-                .then((response) => {
-                    const { data } = response;
-                    this.people = data;
-                })
-                .catch((error) => {
-                    console.log(error);
-                })
-        }
+        
     }
 }
 
@@ -51,6 +48,7 @@ export default {
     <div>
         <button v-on:click="loadData()">Refresh</button>
         <div>
+            <p v-if="apiError">API Error Occured</p>
             <p>Current time: {{ time }}</p>
             <p>Total records: {{ totalRecords }} in {{ companyNameFormatted }}</p>
             <b-card v-for="person in people" :title="person.username" img-alt="Image" img-top tag="article"
