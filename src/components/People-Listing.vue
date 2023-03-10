@@ -6,17 +6,7 @@ import Axios from "axios";
 
 export default {
     mounted() {
-        
-        Axios.get("https://jsonplaceholder.typicode.com/users")
-        .then((response)=>{
-            const { data } = response;
-            this.people = data;
-        })
-        .catch((error)=>{
-            console.log(error);
-        })
-
-
+        this.loadData();
     },
     data: function () {
         return {
@@ -36,7 +26,16 @@ export default {
 
     },
     methods: {
-
+        loadData() {
+            Axios.get("https://jsonplaceholder.typicode.com/users")
+                .then((response) => {
+                    const { data } = response;
+                    this.people = data;
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+        }
     }
 }
 
@@ -44,15 +43,18 @@ export default {
 
 <template>
     <div>
-        <p>Current time: {{time}}</p>
-        <p>Total records: {{ totalRecords }} in {{ companyNameFormatted }}</p>
-        <b-card v-for="person in people" :title="person.role" :img-src="person.profilePic" img-alt="Image" img-top
-            tag="article" style="max-width: 20rem;" class="mb-2">
-            <b-card-text>
-                {{ person.name }} {{ person.age }}
-            </b-card-text>
-            <b-button :href="person.profileLink" variant="primary">Go somewhere</b-button>
-        </b-card>
+        <button v-on:click="loadData()">Refresh</button>
+        <div>
+            <p>Current time: {{ time }}</p>
+            <p>Total records: {{ totalRecords }} in {{ companyNameFormatted }}</p>
+            <b-card v-for="person in people" :title="person.role" :img-src="person.profilePic" img-alt="Image" img-top
+                tag="article" style="max-width: 20rem;" class="mb-2">
+                <b-card-text>
+                    {{ person.name }} {{ person.age }}
+                </b-card-text>
+                <b-button :href="person.profileLink" variant="primary">Go somewhere</b-button>
+            </b-card>
+        </div>
     </div>
 </template>
 
