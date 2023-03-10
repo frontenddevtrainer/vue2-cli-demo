@@ -10,7 +10,7 @@ export default {
         this.loadData();
     },
     filters: {
-        website(value: Person){
+        website(value: Person) : string{
             return value.website + " " + value.company.name;
         }
     },
@@ -56,7 +56,7 @@ export default {
             <b-card v-for="person in people" :title="person.username" img-alt="Image" img-top tag="article"
                 style="max-width: 20rem;" class="mb-2">
                 <b-card-text>
-                    {{ person.name }} {{ person.phone }} {{ person | website }}
+                    {{ person.name }} {{ person.phone }} {{ person | website | toUppercase | toLowercase }}
                 </b-card-text>
                 <b-button :href="person.website" variant="primary">Go somewhere</b-button>
             </b-card>
