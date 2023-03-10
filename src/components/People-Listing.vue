@@ -9,6 +9,11 @@ export default {
     mounted() {
         this.loadData();
     },
+    filters: {
+        website(value: Person){
+            return value.website + " " + value.company.name;
+        }
+    },
     data: function (): { companyName: string, time: Date, interval: number, people: Person[] } {
         return {
             companyName: "tavant",
@@ -51,7 +56,7 @@ export default {
             <b-card v-for="person in people" :title="person.username" img-alt="Image" img-top tag="article"
                 style="max-width: 20rem;" class="mb-2">
                 <b-card-text>
-                    {{ person.name }} {{ person.phone }}
+                    {{ person.name }} {{ person.phone }} {{ person | website }}
                 </b-card-text>
                 <b-button :href="person.website" variant="primary">Go somewhere</b-button>
             </b-card>
