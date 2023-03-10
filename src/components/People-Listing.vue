@@ -2,14 +2,23 @@
 export default {
     mounted() {
         console.log("mounted");
-        setInterval(()=>{
+        this.interval = setInterval(()=>{
             this.time = new Date();
+            console.log("setInterval")
         }, 1000)
+    },
+    updated() {
+        console.log("updated")
+    },
+    destroyed() {
+        console.log("destroyed")
+        clearInterval(this.interval)
     },
     data: function () {
         return {
             companyName: "tavant",
             time: new Date(),
+            interval: -1,
             people: [
                 {
                     name: "abc",
