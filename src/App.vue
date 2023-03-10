@@ -2,18 +2,6 @@
 import Navbar from "./components/Navbar.vue";
 import PeopleListing from "./components/People-Listing.vue"
 
-const peopleData: any = [
-    {
-      name : "abc"
-    },
-    {
-      name : "def"
-    },
-    {
-      name : "xyz"
-    }
-]
-
 </script>
 
 <template>
@@ -23,7 +11,7 @@ const peopleData: any = [
       <div class="row">
         <div class="col-3">Hello world!!!</div>
         <div class="col-9">
-          <PeopleListing v-bind:people="peopleData" />
+          <PeopleListing />
         </div>
       </div>
     </div>
