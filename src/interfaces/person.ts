@@ -27,3 +27,13 @@ export interface Person {
     website: string;
     company: Company;
 }
+
+export interface AddPeopleData {
+    form: {
+        email: string,
+        name: string,
+        food: string,
+        checked: boolean
+    },
+    foods: (string | { text: string, value: null | string })[]
+}

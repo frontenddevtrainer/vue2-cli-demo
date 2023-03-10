@@ -1,15 +1,15 @@
 import Axios from "axios";
 
 export function loadPeople() {
-    return Axios.get("https://jsonplaceholder.typicode.com/users")
+    return Axios.get("http://localhost:3000/people")
         .then((response) => {
             const { data } = response;
             return data
         })
 }
 
-export function savePerson() {
-    return Axios.post("https://jsonplaceholder.typicode.com/users")
+export function savePerson(form) {
+    return Axios.post("http://localhost:3000/people", form)
         .then((response) => {
             const { data } = response;
             return data

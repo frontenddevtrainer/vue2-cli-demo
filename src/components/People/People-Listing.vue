@@ -3,8 +3,8 @@
 // Axios - 3rd Party
 
 import Axios from "axios";
-import type { Person } from "../interfaces/person"
-import { loadPeople } from "../api/people"
+import type { Person } from "../../interfaces/person"
+import { loadPeople } from "../../api/people"
 
 export default {
     mounted() {
@@ -16,7 +16,7 @@ export default {
     },
     filters: {
         website(value: Person) : string{
-            return value.website + " " + value.company.name;
+            return value.website + " " + value?.company?.name;
         }
     },
     data: function (): { companyName: string, time: Date, interval: number, people: Person[], apiError: boolean } {
