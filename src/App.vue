@@ -2,11 +2,13 @@
 import Navbar from "./components/Navbar.vue";
 import PeopleListing from "./components/People-Listing.vue"
 
+
 </script>
 
 <template>
   <div>
     <Navbar />
+    <button>show listing</button>
     <div class="container">
       <div class="row">
         <div class="col-3">Hello world!!!</div>

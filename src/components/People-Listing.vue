@@ -1,8 +1,15 @@
 <script lang="ts">
 export default {
+    mounted() {
+        console.log("mounted");
+        setInterval(()=>{
+            this.time = new Date();
+        }, 1000)
+    },
     data: function () {
         return {
             companyName: "tavant",
+            time: new Date(),
             people: [
                 {
                     name: "abc",
@@ -26,10 +33,10 @@ export default {
                 }
             })
         },
-        totalRecords(){
+        totalRecords() {
             return this.generatePeople.length;
         },
-        companyNameFormatted(){
+        companyNameFormatted() {
             return this.companyName.toUpperCase()
         }
 
@@ -43,7 +50,8 @@ export default {
 
 <template>
     <div>
-        <p>Total records: {{totalRecords}} in {{companyNameFormatted}}</p>
+        <p>Current time: {{time}}</p>
+        <p>Total records: {{ totalRecords }} in {{ companyNameFormatted }}</p>
         <b-card v-for="person in generatePeople" :title="person.role" :img-src="person.profilePic" img-alt="Image" img-top
             tag="article" style="max-width: 20rem;" class="mb-2">
             <b-card-text>
