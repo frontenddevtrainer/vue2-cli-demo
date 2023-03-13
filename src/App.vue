@@ -21,8 +21,9 @@ function changeShowPeopleListing() {
           <AddPeople />
         </div>
         <div class="col-9">
-          <button v-on:click="changeShowPeopleListing()">Show</button>
-          <PeopleListing/>
+          <!-- <button v-on:click="changeShowPeopleListing()">Show</button>
+          <PeopleListing/> -->
+          <router-view></router-view>
         </div>
       </div>
     </div>
