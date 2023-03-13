@@ -49,7 +49,12 @@ export default {
             bind(el, binding, vnode){
                 console.log(binding);
                 const { color } = binding.value
-                el.style.color = color
+                el.style.color = color;
+
+                el.addEventListener("click", ()=>{
+                    console.log("event from directive")
+                    el.style.color = "blue"
+                })
             }
         }
     }
