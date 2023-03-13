@@ -42,6 +42,9 @@ export default {
     methods: {
         showMessage(person: any, event: any){
             console.log(person, event)
+        },
+        handler(){
+            console.log("event from directive");
         }
     },
     directives: {
@@ -54,6 +57,7 @@ export default {
                 el.addEventListener("click", ()=>{
                     console.log("event from directive")
                     el.style.color = "blue"
+                    vnode.context?.$emit("my-custom-event");
                 })
             }
         }
@@ -73,7 +77,7 @@ export default {
             <p>Total records: {{ totalRecords }} in {{ companyNameFormatted }}</p>
             <b-card v-for="person in people" v-on:mouseover="showMessage(person, $event)" key="person.id" :title="person.username" img-alt="Image" img-top tag="article"
                 style="max-width: 20rem;" class="mb-2">
-                <b-card-text v-change-color="{ color, secondPartyName: 'secondPartyValue' }">
+                <b-card-text v-change-color="{ color, secondPartyName: 'secondPartyValue' }" @my-custom-event=" handler()" >
                     {{ person.name }} {{ person.phone }} {{ person | website | toUppercase | toLowercase }}
                 </b-card-text>
                 <b-button :href="person.website" variant="primary">Go somewhere</b-button>
