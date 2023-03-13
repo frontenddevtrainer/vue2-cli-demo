@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 
 import Homepage from "../pages/homepage.vue";
 import Products from "../pages/products.vue";
+import ProductDetail from "../pages/products-detail.vue";
 
 Vue.use(VueRouter);
 
@@ -16,8 +17,13 @@ const router = new VueRouter({
     }, {
       path: "/products",
       component: Products
-    }
-  ],
+    },
+    {
+      path: "/products/:id",
+      component: ProductDetail,
+      props: true
+    },
+  ]
 });
 
 export default router;
